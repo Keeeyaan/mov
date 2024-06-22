@@ -1,0 +1,15 @@
+<div (mouseenter)="onMouseHover()" (mouseleave)="onMouseHover()" class="cursor-pointer h-[350px] w-[250px] bg-slate-400 p-4 rounded hover:bg-slate-300 transition-all relative">
+    @if (isShow) {
+        <div class="absolute bg-slate-200 py-1 px-2 rounded right-4 transition-all">
+            <button>
+                <span class="pi pi-ellipsis-v"></span>
+            </button>
+        </div>
+    }
+    <h1 class="text-xl font-bold">
+        {{movie.title}}
+    </h1>
+    <p class="text-sm">
+        {{movie.description}}
+    </p>
+</div>
