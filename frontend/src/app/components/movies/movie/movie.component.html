@@ -1,15 +1,13 @@
-<div (mouseenter)="onMouseHover()" (mouseleave)="onMouseHover()" class="cursor-pointer h-[350px] w-[250px] bg-slate-400 p-4 rounded hover:bg-slate-300 transition-all relative">
+<div style="background-image: url(assets/images/movie-placeholder.jpg);"  (mouseenter)="onMouseHover()" (mouseleave)="onMouseHover()" class="mb-2 bg-no-repeat bg-cover cursor-pointer h-[350px] w-[250px] bg-gradient-to-t from-slate-800 to-slate-700 shadow border border-slate-400 p-4 rounded transition-all relative">    
     @if (isShow) {
-        <div class="absolute bg-slate-200 py-1 px-2 rounded right-4 transition-all">
+        <div class="absolute bg-slate-100 py-1 px-2.5 rounded right-2 top-2 transition-all">
             <button>
                 <span class="pi pi-ellipsis-v"></span>
             </button>
         </div>
     }
-    <h1 class="text-xl font-bold">
-        {{movie.title}}
-    </h1>
-    <p class="text-sm">
-        {{movie.description}}
-    </p>
 </div>
+<h1 class="text-base text-white ">
+    {{movie.title}}
+</h1>
+

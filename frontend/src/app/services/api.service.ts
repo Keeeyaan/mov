@@ -1,16 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { Options } from '../../types';
+import axios from 'axios';
+import { Movie } from '../components/movies/movie/movie.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private httpClient: HttpClient) {}
+  getAllMovies() {
+    return axios.get<Movie[]>('http://localhost:8000/api/movies/');
+  }
 
-  get<T>(url: string, options?: Options): Observable<T> {
-    return this.httpClient.get<T>(url, options) as Observable<T>;
+  createNewMovie(data: { title: string; description: string }) {
+    return axios.post('http://localhost:8000/api/movies/', data);
   }
 }
