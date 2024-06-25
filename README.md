@@ -38,10 +38,11 @@ pip install -r requirements.txt
 
 4. Set Up Environment Variables
 Create a .env file in the backend directory and add your Cloudinary credentials:
+> *(Note: For this step a temporary variables is already added you can skip this.)*
 ```
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+CLOUD_CLOUD_NAME=your_cloud_name
+CLOUD_API_KEY=your_api_key
+CLOUD_API_SECRET=your_api_secret
 ```
 
 5. Apply Migrations
