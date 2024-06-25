@@ -66,7 +66,7 @@ def movie_detail(request, pk):
                 movie.image_public_id = upload_image_result['public_id']
                 movie.save()
 
-            if 'movie' in request.FILES:
+            if 'video' in request.FILES:
                 if movie.video_public_id:
                     cloudinary.uploader.destroy(
                         movie.video_public_id, resource_type='video')

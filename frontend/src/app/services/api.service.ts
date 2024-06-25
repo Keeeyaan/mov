@@ -18,15 +18,8 @@ export class ApiService {
     return axios.get<Movie>(`http://localhost:8000/api/movies/${id}`);
   }
 
-  updateMovieById(
-    id: string,
-    data: {
-      title: string;
-      year_release: string;
-      description: string;
-    }
-  ) {
-    return axios.put(`http://localhost:8000/api/movies/${id}/`, data);
+  updateMovieById(id: string, formData: FormData) {
+    return axios.put(`http://localhost:8000/api/movies/${id}/`, formData);
   }
 
   deleteMovieById(id: string) {

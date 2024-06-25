@@ -57,6 +57,8 @@ export class MovieComponent {
   @Output() movieReFetch = new EventEmitter<void>();
   items: MenuItem[] | undefined;
   visible = false;
+  selectedImageFile: File | null = null;
+  selectedVideoFile: File | null = null;
 
   form = new FormGroup({
     title: new FormControl('', [
@@ -73,22 +75,84 @@ export class MovieComponent {
       Validators.required,
       Validators.maxLength(4),
     ]),
+    genre: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(100),
+    ]),
+    country: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(100),
+    ]),
   });
+
+  onFileImageSelect(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedImageFile = input.files[0];
+    }
+  }
+
+  onFileVideoSelect(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedVideoFile = input.files[0];
+    }
+  }
+  get titleIsInvalid() {
+    return (
+      this.form.controls.title.touched &&
+      this.form.controls.title.dirty &&
+      this.form.controls.title.invalid
+    );
+  }
+  get yearReleaseIsInvalid() {
+    return (
+      this.form.controls.yearRelease.touched &&
+      this.form.controls.yearRelease.dirty &&
+      this.form.controls.yearRelease.invalid
+    );
+  }
+  get genreIsInvalid() {
+    return (
+      this.form.controls.genre.touched &&
+      this.form.controls.genre.dirty &&
+      this.form.controls.genre.invalid
+    );
+  }
+  get countryIsInvalid() {
+    return (
+      this.form.controls.country.touched &&
+      this.form.controls.country.dirty &&
+      this.form.controls.country.invalid
+    );
+  }
+  get descriptionIsInvalid() {
+    return (
+      this.form.controls.description.touched &&
+      this.form.controls.description.dirty &&
+      this.form.controls.description.invalid
+    );
+  }
 
   onSubmit() {
     if (this.form.valid) {
-      let enteredTitle = this.form.value.title;
-      let enteredYearRelease = this.form.value.yearRelease;
-      let enteredDescription = this.form.value.description;
+      const formData = new FormData();
+      formData.append('title', this.form.value.title!);
+      formData.append('year_release', this.form.value.yearRelease!);
+      formData.append('country', this.form.value.country!);
+      formData.append('genre', this.form.value.genre!);
+      formData.append('description', this.form.value.description!);
 
-      const data = {
-        title: enteredTitle!,
-        year_release: enteredYearRelease!,
-        description: enteredDescription!,
-      };
+      if (this.selectedImageFile) {
+        formData.append('image', this.selectedImageFile);
+      }
+
+      if (this.selectedVideoFile) {
+        formData.append('video', this.selectedVideoFile);
+      }
 
       this.moviesApiService
-        .updateMovieById(this.movie.id, data)
+        .updateMovieById(this.movie.id, formData)
         .then((response) => {
           this.movieReFetch.emit();
           console.log(response);
@@ -152,6 +216,8 @@ export class MovieComponent {
       title: this.movie.title,
       description: this.movie.description,
       yearRelease: this.movie.year_release!,
+      country: this.movie.country!,
+      genre: this.movie.genre!,
     });
   }
 

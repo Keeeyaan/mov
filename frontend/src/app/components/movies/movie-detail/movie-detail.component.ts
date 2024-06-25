@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { format } from 'date-fns';
+
 import { DialogModule } from 'primeng/dialog';
 
 import { ApiService } from '../../../services/api.service';
@@ -46,6 +48,10 @@ export class MovieDetailComponent {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  formatDateCreated() {
+    return format(this.movie?.created_at!, 'LLLL dd, y');
   }
 
   getMovieUrl(): string {

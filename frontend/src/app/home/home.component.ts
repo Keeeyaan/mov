@@ -18,11 +18,6 @@ import { MoviesComponent } from '../components/movies/movies.component';
 import { ApiService } from '../services/api.service';
 import { Movie } from '../components/movies/movie/movie.model';
 
-interface UploadEvent {
-  originalEvent: Event;
-  files: File[];
-}
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -83,7 +78,7 @@ export class HomeComponent implements OnInit {
     ]),
     genre: new FormControl('', [
       Validators.required,
-      Validators.maxLength(1024),
+      Validators.maxLength(100),
     ]),
     country: new FormControl('', [
       Validators.required,
@@ -114,6 +109,13 @@ export class HomeComponent implements OnInit {
       this.form.controls.genre.touched &&
       this.form.controls.genre.dirty &&
       this.form.controls.genre.invalid
+    );
+  }
+  get countryIsInvalid() {
+    return (
+      this.form.controls.country.touched &&
+      this.form.controls.country.dirty &&
+      this.form.controls.country.invalid
     );
   }
   get descriptionIsInvalid() {
@@ -173,10 +175,6 @@ export class HomeComponent implements OnInit {
       this.visible = false;
       this.form.reset();
     }
-  }
-
-  onUpload(event?: UploadEvent) {
-    console.log(event);
   }
 
   onAddMovie() {
