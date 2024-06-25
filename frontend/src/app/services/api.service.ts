@@ -10,7 +10,26 @@ export class ApiService {
     return axios.get<Movie[]>('http://localhost:8000/api/movies/');
   }
 
-  createNewMovie(data: { title: string; description: string }) {
-    return axios.post('http://localhost:8000/api/movies/', data);
+  createNewMovie(formData: FormData) {
+    return axios.post('http://localhost:8000/api/movies/', formData);
+  }
+
+  getMovieById(id: string) {
+    return axios.get<Movie>(`http://localhost:8000/api/movies/${id}`);
+  }
+
+  updateMovieById(
+    id: string,
+    data: {
+      title: string;
+      year_release: string;
+      description: string;
+    }
+  ) {
+    return axios.put(`http://localhost:8000/api/movies/${id}/`, data);
+  }
+
+  deleteMovieById(id: string) {
+    return axios.delete(`http://localhost:8000/api/movies/${id}/`);
   }
 }

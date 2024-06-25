@@ -3,7 +3,7 @@
         <ul class="flex gap-4 flex-wrap items-center">
             @for (movie of movies; track movie.id) {
                 <li>
-                    <app-movie (click)="onSelectMovie(movie)" [movie]="movie"/>
+                    <app-movie (movieReFetch)="onMovieReFetch()" [movie]="movie"/>
                 </li>
             }
         </ul>    

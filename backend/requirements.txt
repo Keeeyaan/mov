@@ -1,4 +1,7 @@
 django
 djangorestframework
 django-cors-headers
+cloudinary
+django-cloudinary-storage[video]
+pillow
 environs

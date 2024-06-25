@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { MovieComponent } from './movie/movie.component';
 import { Movie } from './movie/movie.model';
@@ -11,14 +10,10 @@ import { Movie } from './movie/movie.model';
   templateUrl: './movies.component.html',
 })
 export class MoviesComponent {
-  constructor(private router: Router) {}
-
   @Input({ required: true }) movies!: Movie[];
+  @Output() movieReFetch = new EventEmitter<void>();
 
-  onSelectMovie(movie: Movie) {
-    let formattedUrl =
-      movie.title.replace(' ', '-').toLowerCase().trim() + '-' + movie.id;
-
-    this.router.navigate(['/movies', formattedUrl]);
+  onMovieReFetch() {
+    this.movieReFetch.emit();
   }
 }
